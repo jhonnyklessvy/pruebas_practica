@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba API</title>
+</head>
+<body>
+    <h1>Prueba de API de Productos</h1>
+    <pre id="result"></pre>
+
+    <script>
+        // Función para enviar la solicitud al cargar la página
+        const fetchProductos = () => {
+            fetch('http://localhost:3000/api/productos', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    favoritos: true,
+                    clasificaciones: ["Perros", "dogourmet"],
+                    estado: "Activo"
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Productos filtrados:', data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        };
+
+        // Llamar a la función al cargar la página
+        window.onload = fetchProductos;
+    </script>
+</body>
+</html>
